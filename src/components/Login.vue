@@ -75,7 +75,7 @@
     width: 450px;
     height: 300px;
     background-color: #fff;
-    border-radius: 3px;
+    border-radius: 15px;
     position: absolute;
     left: 50%;
     top: 50%;
