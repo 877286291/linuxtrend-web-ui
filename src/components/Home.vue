@@ -11,7 +11,22 @@
     <!-- 页面主体区域 -->
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside width="200px">Aside</el-aside>
+      <el-aside width="200px">
+        <el-menu background-color="#373d41" text-color="#fff" active-text-color="#ff404b">
+          <el-submenu index="1">
+            <template slot="title">
+              <i class="el-icon-location"/>
+              <span>导航一</span>
+            </template>
+            <el-menu-item index="1-4-1">
+              <template slot="title">
+                <i class="el-icon-location"/>
+                <span>导航一</span>
+              </template>
+            </el-menu-item>
+          </el-submenu>
+        </el-menu>
+      </el-aside>
       <!-- 右侧内容区域 -->
       <el-main>Main</el-main>
     </el-container>
@@ -54,6 +69,7 @@
     display: flex;
     align-items: center;
   }
+
   .el-header span {
     margin-left: 15px;
   }
