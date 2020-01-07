@@ -24,7 +24,7 @@
         <el-table-column label="邮箱" prop="email"/>
         <el-table-column label="用户状态">
           <template slot-scope="scope">
-            <el-switch v-model="scope.row.state">
+            <el-switch v-model="scope.row.state" @change="userStateChanged(scope.row)">
             </el-switch>
           </template>
         </el-table-column>
@@ -92,8 +92,14 @@
         this.queryInfo.pageNum = newPage;
         this.getUserList()
       },
-      intToBool(state) {
-        return !!state
+      //监听用户状态的改变
+      async userStateChanged(userInfo) {
+        const {data: res} = await this.$http.put('users', {'id': userInfo.id, 'type': userInfo.state})
+        if (res.meta.status !== 200) {
+          userInfo.state = !userInfo.state;
+          return this.$message.error('修改用户状态失败')
+        }
+        this.$message.success('修改用户状态成功')
       }
 
     }
