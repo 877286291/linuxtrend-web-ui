@@ -9,12 +9,12 @@
 
       <el-row :gutter="20">
         <el-col :span="7">
-          <el-input placeholder="请输入内容">
-            <el-button slot="append" icon="el-icon-search"/>
+          <el-input placeholder="请输入内容" v-model="queryInfo.query" clearable @clear="getUserList">
+            <el-button slot="append" icon="el-icon-search" @click="getUserList"/>
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary">添加用户</el-button>
+          <el-button type="primary" @click="addDialogVisible=true">添加用户</el-button>
         </el-col>
       </el-row>
       <el-table :data="userList" border stripe>
@@ -56,6 +56,26 @@
               :total="total">
       </el-pagination>
     </el-card>
+    <!-- 添加用户对话框 -->
+    <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="50%">
+      <!-- 内容主体区 -->
+      <el-form :model="addForm" :rules="addFormRules" ref="addFormForm" label-width="70px">
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="addForm.username"/>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input v-model="addForm.password"/>
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="addForm.email"/>
+        </el-form-item>
+      </el-form>
+      <!-- 底部区域 -->
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -66,16 +86,46 @@
       this.getUserList()
     },
     data() {
+      //验证邮箱
+      var checkEmail = (rule, value, cb) => {
+        const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
+        if (regEmail.test(value)) {
+          return cb
+        }
+        cb(new Error('请输入合法的邮箱'))
+      }
       return {
         queryInfo: {
+          query: '',
           //当前页数
           pageNum: 1,
           //当前每页显示多少条数据
           pageSize: 2,
-
         },
         userList: [],
-        total: 0
+        total: 0,
+        addDialogVisible: false,
+        //添加表单
+        addForm: {
+          username: '',
+          password: '',
+          email: ''
+        },
+        //添加表单验证规则
+        addFormRules: {
+          username: [
+            {required: true, message: '请输入用户名', trigger: 'blur'},
+            {min: 3, max: 10, message: '用户名的长度在3-10个字符之间', trigger: 'blur'}
+          ],
+          password: [
+            {required: true, message: '请输入密码', trigger: 'blur'},
+            {min: 3, max: 10, message: '密码的长度在6-18个字符之间', trigger: 'blur'}
+          ],
+          email: [
+            {required: true, message: '请输入邮箱', trigger: 'blur'},
+            {validator: checkEmail, trigger: 'blur'}
+          ]
+        }
       }
     }, methods: {
       async getUserList() {
