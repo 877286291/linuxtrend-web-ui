@@ -11,31 +11,59 @@
     <!-- 页面主体区域 -->
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside width="200px">
-        <el-menu background-color="#373d41" text-color="#fff" active-text-color="#ff404b">
-          <el-submenu index="1">
+      <el-aside :width="isCollapse ? '64px':'200px'">
+        <div class="toggle-button" @click="toggleCollapse">
+          |||
+        </div>
+        <el-menu background-color="#373d41" text-color="#fff" active-text-color="#409EFF" unique-opened
+                 :collapse="isCollapse" :collapse-transition="false" :default-active="$route.path" router>
+          <el-submenu :index="item.id+'' " v-for="item in menuList" :key="item.id" v-if="item.children">
             <template slot="title">
-              <i class="el-icon-location"/>
-              <span>导航一</span>
+              <i :class="iconObj[item.id]"/>
+              <span>{{item.authName}}</span>
             </template>
-            <el-menu-item index="1-4-1">
+            <el-menu-item :index="'/'+subitem.path" v-for="subitem in item.children" :key="subitem.id">
               <template slot="title">
-                <i class="el-icon-location"/>
-                <span>导航一</span>
+                <i class="el-icon-menu"/>
+                <span>{{subitem.authName}}</span>
               </template>
             </el-menu-item>
           </el-submenu>
+          <el-menu-item v-else :index="'/'+item.path">
+            <i :class="iconObj[item.id]"/>
+            <span>{{item.authName}}</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
       <!-- 右侧内容区域 -->
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view/>
+      </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
   export default {
+    created() {
+      this.getMenuList()
+    },
     name: "Home",
+    data() {
+      return {
+        menuList: [],
+        iconObj: {
+          '1': 'el-icon-alishouye',
+          '2': 'el-icon-alijiankong',
+          '3': 'el-icon-alixunjianchulirenyuan',
+          '4': 'el-icon-aliyunbushu',
+          '5': 'el-icon-alibaojing',
+          '6': 'el-icon-aliwj-rz',
+          '7': 'el-icon-aliguanli',
+        },
+        isCollapse: false,
+      }
+    },
     methods: {
       logout() {
         window.sessionStorage.clear();
@@ -44,8 +72,18 @@
           type: 'warning'
         });
         this.$router.push('/login')
+      },
+      async getMenuList() {
+        const {data: res} = await this.$http.get('menu');
+        if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
+        this.menuList = res.data;
+      },
+      //点击按钮切换折叠展开
+      toggleCollapse() {
+        this.isCollapse = !this.isCollapse
       }
     }
+
   }
 </script>
 
@@ -76,10 +114,29 @@
 
   .el-aside {
     background-color: #373d41;
+
+  }
+
+  .el-aside .el-menu {
+    border-right: None;
   }
 
   .el-main {
     background-color: #EAEDF1;
+  }
+
+  .el-menu [class^=el-icon-] {
+    margin-right: 20px;
+  }
+
+  .toggle-button {
+    background-color: #373d41;
+    font-size: 10px;
+    line-height: 24px;
+    color: #ffffff;
+    text-align: center;
+    letter-spacing: 0.5em;
+    cursor: pointer;
   }
 
 </style>
