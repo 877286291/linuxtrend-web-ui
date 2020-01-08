@@ -158,7 +158,7 @@
       async getUserList() {
         const {data: res} = await this.$http.get('users', {params: this.queryInfo});
         if (res.meta.status !== 200) return this.$message.error('获取用户列表失败');
-        this.userList = res.data.users;
+        this.userList = res.data['users'];
         this.total = res.data.total
       },
       handleSizeChange(newSize) {
