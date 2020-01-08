@@ -7,7 +7,7 @@
     </el-breadcrumb>
     <!-- 巡检内容 -->
     <el-card>
-      <el-table :data="inspectionData" tyle="width: 100%" stripe>
+      <el-table :data="inspectionData" tyle="width: 100%" stripe v-loading="loading">
         <el-table-column prop="id" label="id" type="index"/>
         <el-table-column prop="problem" label="问题概述"/>
         <el-table-column prop="sn" label="主机SN"/>
@@ -39,14 +39,17 @@
           pageNum: 1,
           pageSize: 30
         },
-        total: 0
+        total: 0,
+        loading: true
       }
     },
     methods: {
       async getInspectionData() {
-        const {data: res} = await this.$http.get('inspection',{params:this.queryInfo});
+        this.loading = true;
+        const {data: res} = await this.$http.get('inspection', {params: this.queryInfo});
         if (res.meta.status !== 200) return this.$message.error('获取巡检数据失败');
         this.total = res.data.total;
+        this.loading = false;
         this.inspectionData = res.data['inspection_data'];
       },
       handleSizeChange(newSize) {

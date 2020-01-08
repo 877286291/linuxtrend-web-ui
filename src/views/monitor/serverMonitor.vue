@@ -6,7 +6,8 @@
       <el-breadcrumb-item>主机监控</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <ve-line :data="chartData" :settings="chartSettings" height="800px"/>
+      <ve-line :data="chartData" :settings="chartSettings" height="800px" :data-zoom="dataZoom"
+               :toolbox="toolbox" :loading="loading"/>
     </el-card>
   </div>
 </template>
@@ -21,6 +22,19 @@
         stack: {'分区': ['JX3600BP', 'CQ5000BB', 'SI1400BP']},
         area: true
       };
+      this.dataZoom = [
+        {
+          type: 'slider',
+          start: 0,
+          end: 100
+        }
+      ];
+      this.toolbox = {
+        feature: {
+          // magicType: {type: ['line', 'bar']},
+          saveAsImage: {}
+        }
+      };
       return {
         chartData: {
           columns: ['时间', 'JX3600BP', 'CQ5000BB', 'SI1400BP'],
@@ -31,7 +45,8 @@
             {'时间': '00:03', 'JX3600BP': 1723, 'CQ5000BB': 1423, 'SI1400BP': 0.49 * 1000},
             {'时间': '00:04', 'JX3600BP': 3792, 'CQ5000BB': 3492, 'SI1400BP': 0.323 * 1000},
             {'时间': '00:05', 'JX3600BP': 4593, 'CQ5000BB': 4293, 'SI1400BP': 0.78 * 1000}
-          ]
+          ],
+          loading: true
         }
       }
     }

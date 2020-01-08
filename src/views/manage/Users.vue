@@ -17,7 +17,7 @@
           <el-button type="primary" @click="addDialogVisible=true">添加用户</el-button>
         </el-col>
       </el-row>
-      <el-table :data="userList" border stripe>
+      <el-table :data="userList" border stripe v-loading="loading">
         <el-table-column label="id" prop="id" type="index"/>
         <el-table-column label="用户名" prop="username"/>
         <el-table-column label="头像" prop="avatar"/>
@@ -152,13 +152,16 @@
             {required: true, message: '请输入邮箱', trigger: 'blur'},
             {validator: checkEmail, trigger: 'blur'}
           ]
-        }
+        },
+        loading: true
       }
     }, methods: {
       async getUserList() {
+        this.loading = true;
         const {data: res} = await this.$http.get('users', {params: this.queryInfo});
         if (res.meta.status !== 200) return this.$message.error('获取用户列表失败');
         this.userList = res.data['users'];
+        this.loading = false;
         this.total = res.data.total
       },
       handleSizeChange(newSize) {
