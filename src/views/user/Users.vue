@@ -37,7 +37,7 @@
             </el-tooltip>
             <!-- 删除按钮 -->
             <el-tooltip effect="dark" content="删除用户" placement="top" :enterable="false">
-              <el-button type="danger" icon="el-icon-delete"/>
+              <el-button type="danger" icon="el-icon-delete" @click="removeUserById(scope.row.id)"/>
             </el-tooltip>
             <!-- 分配角色按钮 -->
             <el-tooltip effect="dark" content="分配角色" placement="top" :enterable="false">
@@ -108,7 +108,7 @@
           return callback()
         }
         callback(new Error('请输入合法的邮箱'))
-      }
+      };
       return {
         queryInfo: {
           query: '',
@@ -171,7 +171,7 @@
       },
       //监听用户状态的改变
       async userStateChanged(userInfo) {
-        const {data: res} = await this.$http.put('users', {'id': userInfo.id, 'type': userInfo.state})
+        const {data: res} = await this.$http.put('users', {'id': userInfo.id, 'type': userInfo.state});
         if (res.meta.status !== 200) {
           userInfo.state = !userInfo.state;
           return this.$message.error('修改用户状态失败')
@@ -190,7 +190,7 @@
       addUser() {
         this.$refs.addFormRef.validate(async (valid) => {
           if (!valid) return;
-          const {data: res} = await this.$http.post('users', this.addForm)
+          const {data: res} = await this.$http.post('users', this.addForm);
           if (res.meta.status !== 200) {
             return this.$message.error('添加用户失败')
           }
@@ -219,6 +219,22 @@
           this.getUserList();
           return this.$message.success('用户信息更新成功！')
         })
+      },
+      //根据id删除用户信息
+      async removeUserById(id) {
+        //询问用户是否删除
+        const info = await this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).catch(err => err);
+        if (info !== 'confirm') {
+          return this.$message.info('取消删除')
+        }
+        const {data: res} = await this.$http.delete('users', {params: {'id': id}});
+        if (res.meta.status !== 200) return this.$message.error('用户删除失败！');
+        this.$message.success('用户删除成功！');
+        this.getUserList()
       }
 
     }
