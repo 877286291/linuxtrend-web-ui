@@ -7,14 +7,19 @@ const Login = () => import('../components/Login');
 const Home = () => import('../components/Home');
 const Index = () => import('../views/index/Index');
 const Users = () => import('../views/manage/Users');
+const serverList = () => import('../views/monitor/serverList');
 const serverMonitor = () => import('../views/monitor/serverMonitor');
-const dbMonitor = () => import('../views/monitor/dbMonitor');
+const dbList = () => import('../views/monitor/dbList');
 const Inspection = () => import('../views/inspection/Inspection');
 const Deploy = () => import('../views/deploy/Deploy');
 const Alarm = () => import('../views/alarm/Alarm');
 const Log = () => import('../views/log/Log');
 
 const routes = [
+  {
+    path: '/',
+    redirect: '/index'
+  },
   {
     path: '/login',
     component: Login
@@ -26,8 +31,9 @@ const routes = [
     children: [
       {path: '/index', component: Index},
       {path: '/users', component: Users},
-      {path: '/serverMonitor', component: serverMonitor},
-      {path: '/dbMonitor', component: dbMonitor},
+      {path: '/serverList', component: serverList},
+      {path:'/serverMonitor/:serverName',component:serverMonitor},
+      {path: '/dbList', component: dbList},
       {path: '/inspection', component: Inspection},
       {path: '/deploy', component: Deploy},
       {path: '/alarm', component: Alarm},

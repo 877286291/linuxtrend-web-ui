@@ -1,12 +1,10 @@
 <template>
-  <div>
-    Monitor
-  </div>
+  <el-card>dbList</el-card>
 </template>
 
 <script>
   export default {
-    name: "dbMonitor"
+    name: "dbList"
   }
 </script>
 
