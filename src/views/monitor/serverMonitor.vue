@@ -6,9 +6,8 @@
       <el-breadcrumb-item>主机监控</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <ve-line :data="chartData" :settings="chartSettings" height="700px" :loading="loading" :data-empty="dataEmpty">
-
-      </ve-line>
+      <ve-line :data="chartData" :settings="chartSettings" height="800px" :data-zoom="dataZoom" :loading="loading"
+               :data-empty="dataEmpty"/>
     </el-card>
   </div>
 </template>
@@ -20,11 +19,19 @@
     },
     name: "serverMonitor",
     data() {
-      this.chartSettings = {
-        stack: {'分区': []},
-        area: true
-      };
       return {
+        chartSettings: {
+          stack: {'分区': []},
+          area: true
+        },
+        dataZoom: [
+          {
+            type: 'slider',
+            show: false,
+            start: 0,
+            end: 100
+          }
+        ],
         chartData: {
           columns: [],
           rows: []
