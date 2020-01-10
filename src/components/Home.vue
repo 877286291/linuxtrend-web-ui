@@ -6,7 +6,13 @@
         <img src="../assets/logo.png" alt="" height="48" width="48">
         <span>星联云服运维平台</span>
       </div>
-      <el-button round @click="logout">退出</el-button>
+      <el-dropdown>
+        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"/>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item @click.native="">个人中心</el-dropdown-item>
+          <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </el-header>
     <!-- 页面主体区域 -->
     <el-container>

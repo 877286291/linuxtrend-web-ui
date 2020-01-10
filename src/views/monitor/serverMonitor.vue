@@ -5,6 +5,16 @@
       <el-breadcrumb-item :to="{ path: '/serverList' }">主机列表</el-breadcrumb-item>
       <el-breadcrumb-item>主机监控</el-breadcrumb-item>
     </el-breadcrumb>
+    <el-dropdown hide-on-click>
+      <el-button type="primary">
+        分区列表<i class="el-icon-arrow-down el-icon--right"/>
+      </el-button>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item v-for=" item in chartSettings.stack['分区']" :key="item" @click.native="getDetail(item)">
+          {{item}}
+        </el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
     <el-card>
       <ve-line :data="chartData" :settings="chartSettings" height="800px" :data-zoom="dataZoom" :loading="loading"
                :data-empty="dataEmpty"/>
@@ -27,7 +37,7 @@
         dataZoom: [
           {
             type: 'slider',
-            show: false,
+            show: true,
             start: 0,
             end: 100
           }
@@ -50,11 +60,18 @@
         this.chartData.rows = res.data['rows'];
         this.loading = false;
         if (this.chartData.rows.length === 0) this.dataEmpty = true
+      },
+      getDetail(partitionName) {
+        this.$router.push({
+          path: '/partitionDetail/' + partitionName
+        })
       }
     }
   }
 </script>
 
 <style scoped>
-
+  .el-button {
+    margin-bottom: 5px;
+  }
 </style>
