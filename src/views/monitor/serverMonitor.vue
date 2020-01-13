@@ -1,20 +1,49 @@
 <template>
   <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/index' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/serverList' }">主机列表</el-breadcrumb-item>
-      <el-breadcrumb-item>主机监控</el-breadcrumb-item>
-    </el-breadcrumb>
-    <el-dropdown hide-on-click>
-      <el-button type="primary">
-        分区列表<i class="el-icon-arrow-down el-icon--right"/>
-      </el-button>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item v-for=" item in chartSettings.stack['分区']" :key="item" @click.native="getDetail(item)">
-          {{item}}
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+    <el-row :gutter="20">
+      <el-col :span="4">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/index' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/serverList' }">主机列表</el-breadcrumb-item>
+          <el-breadcrumb-item>主机监控</el-breadcrumb-item>
+        </el-breadcrumb>
+      </el-col>
+      <el-col :span="4">
+        <el-dropdown hide-on-click>
+          <el-button type="primary">
+            分区列表<i class="el-icon-arrow-down el-icon--right"/>
+          </el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item v-for=" item in chartSettings.stack['分区']" :key="item" @click.native="getDetail(item)">
+              {{item}}
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </el-col>
+    </el-row>
+    <el-card style="margin-bottom: 20px">
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <div id="alarmSummary" style="border-radius: 4px">
+            错误事件
+            <el-progress :text-inside="true" :stroke-width="26" :percentage="70"/>
+            警告事件
+            <el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="warning"/>
+            致命事件
+            <el-progress :text-inside="true" :stroke-width="20" :percentage="50" status="exception"/>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <ve-ring :data="serverSummary"></ve-ring>
+        </el-col>
+        <el-col :span="6">
+          <ve-ring :data="serverSummary"></ve-ring>
+        </el-col>
+        <el-col :span="6">
+          <ve-ring :data="serverSummary"></ve-ring>
+        </el-col>
+      </el-row>
+    </el-card>
     <el-card>
       <ve-line :data="chartData" :settings="chartSettings" height="800px" :data-zoom="dataZoom" :loading="loading"
                :data-empty="dataEmpty"/>
@@ -46,6 +75,13 @@
           columns: [],
           rows: []
         },
+        serverSummary: {
+          columns: ['日期', '访问用户'],
+          rows: [
+            {'日期': '1/1', '访问用户': 1393},
+            {'日期': '1/2', '访问用户': 3530},
+          ]
+        },
         loading: true,
         dataEmpty: false
       }
@@ -74,4 +110,9 @@
   .el-button {
     margin-bottom: 5px;
   }
+
+  .el-progress {
+    margin-bottom: 100px;
+  }
+
 </style>
