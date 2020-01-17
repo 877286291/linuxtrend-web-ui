@@ -8,7 +8,7 @@
           <el-breadcrumb-item>主机监控</el-breadcrumb-item>
         </el-breadcrumb>
       </el-col>
-      <el-col :span="4">
+      <el-col :span="4" :offset='10'>
         <el-dropdown hide-on-click>
           <el-button type="primary">
             分区列表<i class="el-icon-arrow-down el-icon--right"/>
@@ -19,6 +19,17 @@
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
+      </el-col>
+      <el-col :span="4">
+        <el-date-picker
+                v-model="dateScope"
+                type="daterange"
+                align="right"
+                unlink-panels
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期">
+        </el-date-picker>
       </el-col>
     </el-row>
     <el-card style="margin-bottom: 20px">
@@ -83,14 +94,15 @@
           ]
         },
         loading: true,
-        dataEmpty: false
+        dataEmpty: false,
+        dateScope: ''
       }
     },
     methods: {
       async getMonitorData(serverName) {
         this.loading = true;
         const {data: res} = await this.$http.post('servers', {'serverName': serverName});
-        if (res.meta.status !== 200) return this.$message.error('监控数据获取失败！');
+        if (res.meta.status !== 200) return this.$message.error('主机监控数据获取失败！');
         this.chartSettings.stack['分区'] = res.data['stackList'];
         this.chartData.columns = res.data['serverList'];
         this.chartData.rows = res.data['rows'];
@@ -99,7 +111,8 @@
       },
       getDetail(partitionName) {
         this.$router.push({
-          path: '/partitionDetail/' + partitionName
+          path: '/partitionDetail/' + partitionName,
+          query: {from: this.$route}
         })
       }
     }
