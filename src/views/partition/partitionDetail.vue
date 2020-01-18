@@ -22,13 +22,13 @@
           <ve-line :data="diskData" ref="chart3"/>
         </el-card>
       </el-tab-pane>
-      <el-tab-pane label="网络" name="4" ref="chart4">
+      <el-tab-pane label="网络" name="4">
         <el-card>
           <ve-line :data="netData" ref="chart4"/>
         </el-card>
       </el-tab-pane>
-      <el-tab-pane label="负载" name="5" ref="chart5">负载</el-tab-pane>
-      <el-tab-pane label="进程" name="6" ref="chart6">进程</el-tab-pane>
+      <el-tab-pane label="负载" name="5">负载</el-tab-pane>
+      <el-tab-pane label="进程" name="6">进程</el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -41,14 +41,12 @@
     },
     data() {
       return {
-        dataEmpty: false,
-        loading: true,
         cpuData: {
           columns: ['时间', 'CPU使用率'],
           rows: []
         },
         memoryData: {
-          columns: ['时间', '已使用','可使用'],
+          columns: ['维度', '内存'],
           rows: []
         },
         netData: {
@@ -67,14 +65,12 @@
 
       },
       async getPartitionData(partitionName) {
-        this.loading = true;
         const {data: res} = await this.$http.post('partitions', {'partitionName': partitionName});
         if (res.meta.status !== 200) return this.$message.error('分区监控数据获取失败！');
         this.cpuData.rows = res.data[0];
         this.memoryData.rows = res.data[1];
         this.diskData.rows = res.data[2];
         this.netData.rows = res.data[3];
-        this.loading = false;
       }
     },
     watch: {
