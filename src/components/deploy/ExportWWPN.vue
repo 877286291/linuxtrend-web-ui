@@ -1,10 +1,10 @@
 <template>
-  <el-card>deploy</el-card>
+  <span>11</span>
 </template>
 
 <script>
   export default {
-    name: "Deploy"
+    name: "ExportWWPN"
   }
 </script>
 

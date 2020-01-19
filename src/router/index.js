@@ -12,7 +12,8 @@ const serverMonitor = () => import('../views/monitor/serverMonitor');
 const partitionDetail = () => import('../views/partition/partitionDetail');
 const dbList = () => import('../views/monitor/dbList');
 const Inspection = () => import('../views/inspection/Inspection');
-const Deploy = () => import('../views/deploy/Deploy');
+const singleDeploy = () => import('../views/deploy/SingleDeploy');
+const batchDeploy = () => import('../views/deploy/BatchDeploy');
 const Alarm = () => import('../views/alarm/Alarm');
 const Log = () => import('../views/log/Log');
 
@@ -37,7 +38,8 @@ const routes = [
       {path: '/partitionDetail/:partitionName', component: partitionDetail},
       {path: '/dbList', component: dbList},
       {path: '/inspection', component: Inspection},
-      {path: '/deploy', component: Deploy},
+      {path: '/singleDeploy', component: singleDeploy},
+      {path: '/batchDeploy', component: batchDeploy},
       {path: '/alarm', component: Alarm},
       {path: '/log', component: Log},
     ]

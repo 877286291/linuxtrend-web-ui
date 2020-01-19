@@ -6,10 +6,10 @@
       <el-breadcrumb-item :to="this.$route.query.from">主机监控</el-breadcrumb-item>
       <el-breadcrumb-item>分区监控</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs type="card" v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="CPU" name="1">
         <el-card>
-          <ve-line :data="cpuData" height="700px" ref="chart1"/>
+          <ve-line :data="cpuData" ref="chart1"/>
         </el-card>
       </el-tab-pane>
       <el-tab-pane label="内存" name="2">

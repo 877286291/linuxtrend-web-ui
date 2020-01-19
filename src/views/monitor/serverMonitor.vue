@@ -32,7 +32,7 @@
         </el-date-picker>
       </el-col>
     </el-row>
-    <el-card style="margin-bottom: 20px">
+    <el-card style="margin-bottom: 20px;height: 380px">
       <el-row :gutter="20">
         <el-col :span="6">
           <div id="alarmSummary" style="border-radius: 4px">
@@ -56,7 +56,7 @@
       </el-row>
     </el-card>
     <el-card>
-      <ve-line :data="chartData" :settings="chartSettings" height="800px" :data-zoom="dataZoom" :loading="loading"
+      <ve-line :data="chartData" :settings="chartSettings" height="600px" :data-zoom="dataZoom" :loading="loading"
                :data-empty="dataEmpty"/>
     </el-card>
   </div>
