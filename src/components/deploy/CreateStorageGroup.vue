@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import UploadExcelComponent from '@/components/UploadExcel/index.vue'
+  import UploadExcelComponent from '../UploadExcel/index.vue'
 
   export default {
     name: 'CreateStorageGroup',
@@ -22,7 +22,7 @@
     },
     methods: {
       beforeUpload(file) {
-        const isLt10M = file.size / 1024 / 1024 < 10
+        const isLt10M = file.size / 1024 / 1024 < 10;
         if (isLt10M) {
           return true
         }
@@ -33,10 +33,10 @@
         return false
       },
       handleSuccess({results, header}) {
-        this.uploadData = results
+        this.uploadData = results;
         this.tableHeader = header
       },
-      nextStep(){
+      nextStep() {
         this.$parent.next('export-wwpn')
       }
     }
