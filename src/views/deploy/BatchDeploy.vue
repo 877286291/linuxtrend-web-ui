@@ -40,7 +40,6 @@
     methods: {
       next(step) {
         this.currentView = step;
-        console.log(this.currentView)
         if (this.active++ > 8) this.active = 0;
       }
     }
