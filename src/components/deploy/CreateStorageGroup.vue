@@ -44,8 +44,9 @@
       async nextStep() {
         this.loading = true;
         const {data: res} = await this.$http.post('createSG', {'profile': 'BZ12'});
-        if (res.meta.status !== 200) this.$message.error('cpc获取失败');
+        if (res.meta.status !== 200) this.$message.error('SG创建失败');
         this.loading = false;
+        this.$message.success('SG创建成功')
         this.$parent.next('export-wwpn')
       }
     }
