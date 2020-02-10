@@ -1,15 +1,13 @@
 <template>
   <div>
-    <el-table :data="bindNicInfo" tyle="width: 100%" stripe v-loading="loading" element-loading-text="分区创建中"
+    <el-table :data="bindNicInfo" tyle="width: 100%" stripe v-loading="loading" element-loading-text="Nic卡绑定中"
               id="bindNicInfo">
       <el-table-column prop="id" label="id" type="index"/>
       <el-table-column prop="name" label="分区名称"/>
-      <el-table-column prop="short-name" label="Short Name"/>
-      <el-table-column prop="description" label="描述"/>
-      <el-table-column prop="processor-mode" label="处理器模式"/>
-      <el-table-column prop="ifl-processors" label="CPU核数"/>
-      <el-table-column prop="initial-memory" label="初始内存"/>
-      <el-table-column prop="maximum-memory" label="最大内存"/>
+      <el-table-column prop="eth0" label="eth0"/>
+      <el-table-column prop="eth1" label="eth1"/>
+      <el-table-column prop="eth2" label="eth2"/>
+      <el-table-column prop="eth3" label="eth3"/>
     </el-table>
     <el-button id="nextStep" type="primary" @click="nextStep">下一步</el-button>
   </div>
@@ -43,5 +41,7 @@
 </script>
 
 <style scoped>
-
+  #nextStep {
+    margin-top: 20px;
+  }
 </style>

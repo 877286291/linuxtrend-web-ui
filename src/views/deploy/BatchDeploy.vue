@@ -40,7 +40,7 @@
       'create-storage-group': CreateStorageGroup,
       'export-wwpn': ExportWWPN,
       'create-partition': createPartition,
-      'bind-nic': binNic,
+      'bind-nic': bindNic,
       'bind-sg': bindSG,
     },
     methods: {
