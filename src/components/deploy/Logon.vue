@@ -2,13 +2,13 @@
   <el-form :model="logonForm" ref="logonFormRef" label-width="80px" style="margin-top: 20px" v-loading='loading'
            element-loading-text="登陆中">
     <el-form-item label="IP">
-      <el-input v-model="logonForm.ip"/>
+      <el-input v-model="logonForm.ip" @keyup.enter.native="submitForm"/>
     </el-form-item>
     <el-form-item label="用户名">
-      <el-input v-model="logonForm.username"/>
+      <el-input v-model="logonForm.username" @keyup.enter.native="submitForm"/>
     </el-form-item>
     <el-form-item label="密码">
-      <el-input v-model="logonForm.password" type="password"/>
+      <el-input v-model="logonForm.password" type="password" @keyup.enter.native="submitForm"/>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm">登陆</el-button>

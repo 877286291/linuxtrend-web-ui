@@ -23,6 +23,8 @@
   import Logon from "../../components/deploy/Logon";
   import CreateStorageGroup from "../../components/deploy/CreateStorageGroup";
   import ExportWWPN from "../../components/deploy/ExportWWPN";
+  import createPartition from "../../components/deploy/createPartition";
+  import binNic from "../../components/deploy/binNic";
 
   export default {
     name: "BatchDeploy",
@@ -33,9 +35,11 @@
       }
     },
     components: {
-      'logon':Logon,
-      'create-storage-group':CreateStorageGroup,
-      'export-wwpn':ExportWWPN
+      'logon': Logon,
+      'create-storage-group': CreateStorageGroup,
+      'export-wwpn': ExportWWPN,
+      'create-partition': createPartition,
+      'bind-nic': binNic
     },
     methods: {
       next(step) {

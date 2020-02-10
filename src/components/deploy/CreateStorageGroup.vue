@@ -55,9 +55,9 @@
 
 <style scoped>
   #nextStep {
-    margin-bottom: 20px;
-    position: absolute;
-    bottom: 0;
-    right: 10px;
+    margin-top: 20px;
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*right: 10px;*/
   }
 </style>
