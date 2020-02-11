@@ -42,7 +42,5 @@
 </script>
 
 <style scoped>
-#nextStep{
-  margin-top: 20px;
-}
+
 </style>

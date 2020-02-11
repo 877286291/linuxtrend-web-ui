@@ -54,10 +54,5 @@
 </script>
 
 <style scoped>
-  #nextStep {
-    margin-top: 20px;
-    /*position: absolute;*/
-    /*bottom: 0;*/
-    /*right: 10px;*/
-  }
+
 </style>

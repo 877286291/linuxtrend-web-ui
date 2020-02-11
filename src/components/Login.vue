@@ -15,7 +15,7 @@
             <el-input v-model="loginForm.password" type="password" prefix-icon="el-icon-lock" placeholder="请输入密码" @keyup.enter.native="login"/>
           </el-form-item>
           <el-form-item class="btns">
-            <el-button type="primary" @click="login">登陆</el-button>
+            <el-button type="primary" @click="login">登录</el-button>
             <el-button type="info" @click="resetLoginForm">重置</el-button>
           </el-form-item>
         </el-form>
@@ -51,7 +51,7 @@
           if (!valid) return;
           const {data: res} = await this.$http.post('login', this.loginForm);
           if (res.status != 200) {
-            return this.$message.error('登陆失败，用户名或密码错误！')
+            return this.$message.error('登陆失败！')
           }
           this.$message.success('登陆成功');
           window.sessionStorage.setItem('token', res.token)

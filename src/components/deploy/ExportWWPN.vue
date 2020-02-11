@@ -9,7 +9,7 @@
       <el-table :data="wwpnData" tyle="width: 100%" stripe v-loading="loading" id="wwpnData">
         <el-table-column prop="id" label="id" type="index"/>
         <el-table-column prop="cpcName" label="CPC名称"/>
-        <el-table-column prop="SG" label="SG名称"/>
+        <el-table-column prop="SG_Name" label="SG名称"/>
         <el-table-column prop="size" label="SG大小"/>
         <el-table-column prop="operation" label="SG操作"/>
         <el-table-column prop="usage" label="SG类型"/>
@@ -63,7 +63,5 @@
 </script>
 
 <style scoped>
-  #nextStep{
-    margin-top: 20px;
-  }
+
 </style>
