@@ -17,7 +17,7 @@
           <el-button type="primary" @click="addDialogVisible=true">添加用户</el-button>
         </el-col>
       </el-row>
-      <el-table :data="userList" border stripe v-loading="loading">
+      <el-table :data="userList" border stripe v-loading="loading" element-loading-text="加载中">
         <el-table-column label="id" prop="id" type="index"/>
         <el-table-column label="用户名" prop="username"/>
         <el-table-column label="头像" prop="avatar"/>
