@@ -14,7 +14,7 @@ const dbList = () => import('../views/monitor/dbList');
 const Inspection = () => import('../views/inspection/Inspection');
 const singleDeploy = () => import('../views/deploy/SingleDeploy');
 const batchDeploy = () => import('../views/deploy/BatchDeploy');
-const Alarm = () => import('../views/alarm/Alarm');
+const Alert = () => import('../views/alert/Alert');
 const Log = () => import('../views/log/Log');
 
 const routes = [
@@ -40,7 +40,7 @@ const routes = [
       {path: '/inspection', component: Inspection},
       {path: '/singleDeploy', component: singleDeploy},
       {path: '/batchDeploy', component: batchDeploy},
-      {path: '/alarm', component: Alarm},
+      {path: '/alert', component: Alert},
       {path: '/log', component: Log},
     ]
   }
