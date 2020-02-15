@@ -16,7 +16,7 @@
           <el-button type="primary" @click="addDialogVisible=true">添加报警规则</el-button>
         </el-col>
       </el-row>
-      <el-table :data="alertList" border stripe v-loading="loading" element-loading-text="规则加载中">
+      <el-table :data="ruleList" border stripe v-loading="loading" element-loading-text="规则加载中">
         <el-table-column label="id" prop="id" type="index"/>
         <el-table-column label="主机名" prop="hostname"/>
         <el-table-column label="CPU" prop="cpu_threshold"/>
@@ -57,10 +57,10 @@
         <el-form-item label="磁盘(写) M/s" prop="diskOutThreshold">
           <el-input v-model="addForm.diskOutThreshold"/>
         </el-form-item>
-        <el-form-item label="磁盘(读) M/s" prop="netInThreshold">
+        <el-form-item label="网络下行 KB/s" prop="netInThreshold">
           <el-input v-model="addForm.netInThreshold"/>
         </el-form-item>
-        <el-form-item label="磁盘(写) M/s" prop="netOutThreshold">
+        <el-form-item label="网络上行 KB/s" prop="netOutThreshold">
           <el-input v-model="addForm.netOutThreshold"/>
         </el-form-item>
       </el-form>
@@ -72,11 +72,26 @@
     </el-dialog>
     <el-dialog title="修改报警规则" :visible.sync="editDialogVisible" width="50%" @close="editDialogClosed">
       <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="70px">
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="editForm.username" disabled/>
+        <el-form-item label="主机名" prop="hostName">
+          <el-input v-model="editForm.hostname" disabled/>
         </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="editForm.email"/>
+        <el-form-item label="CPU" prop="cpuThreshold">
+          <el-input v-model="editForm.cpu_threshold"/>
+        </el-form-item>
+        <el-form-item label="内存" prop="memoryThreshold">
+          <el-input v-model="editForm.memory_threshold"/>
+        </el-form-item>
+        <el-form-item label="磁盘(读) M/s" prop="diskInThreshold">
+          <el-input v-model="editForm.disk_in_threshold"/>
+        </el-form-item>
+        <el-form-item label="磁盘(写) M/s" prop="diskOutThreshold">
+          <el-input v-model="editForm.disk_out_threshold"/>
+        </el-form-item>
+        <el-form-item label="网络下行 KB/s" prop="netInThreshold">
+          <el-input v-model="editForm.net_in_threshold"/>
+        </el-form-item>
+        <el-form-item label="网络上行 KB/s" prop="netOutThreshold">
+          <el-input v-model="editForm.net_out_threshold"/>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -112,7 +127,7 @@
       return {
         loading: true,
         hotsName: '',
-        alertList: [],
+        ruleList: [],
         addDialogVisible: false,
         editDialogVisible: false,
         //添加表单
@@ -130,41 +145,65 @@
             {required: true, message: '请输入主机名', trigger: 'blur'},
           ],
           cpuThreshold: [
-            {validator: validateThreshold, trigger: 'blur', required: true},
+            {trigger: 'blur', required: true, message: '必填项'},
+            {validator: validateThreshold, trigger: 'blur'},
           ],
           memoryThreshold: [
-            {validator: validateThreshold, trigger: 'blur', required: true},
+            {trigger: 'blur', required: true, message: '必填项'},
+            {validator: validateThreshold, trigger: 'blur'},
           ],
           diskInThreshold: [
-            {validator: validateThreshold, trigger: 'blur', required: true},
+            {trigger: 'blur', required: true, message: '必填项'},
+            {validator: validateThreshold, trigger: 'blur'},
           ],
           diskOutThreshold: [
-            {validator: validateThreshold, trigger: 'blur', required: true},
+            {trigger: 'blur', required: true, message: '必填项'},
+            {validator: validateThreshold, trigger: 'blur'},
           ],
           netInThreshold: [
-            {validator: validateThreshold, trigger: 'blur', required: true},
+            {trigger: 'blur', required: true, message: '必填项'},
+            {validator: validateThreshold, trigger: 'blur'},
           ],
           netOutThreshold: [
-            {validator: validateThreshold, trigger: 'blur', required: true},
+            {trigger: 'blur', required: true, message: '必填项'},
+            {validator: validateThreshold, trigger: 'blur'},
           ],
 
         },
         //修改表单
-        editForm: {
-          hostName: '',
-          cpuThreshold: '',
-          memoryThreshold: '',
-          diskInThreshold: '',
-          diskOutThreshold: '',
-          netInThreshold: '',
-          netOutThreshold: ''
+        editForm: {},
+        editFormRules: {
+          cpuThreshold: [
+            {required: true, message: '必填项', trigger: 'blur'},
+            {validator: validateThreshold, trigger: 'blur'},
+          ],
+          memoryThreshold: [
+            {trigger: 'blur', required: true, message: '必填项'},
+            {validator: validateThreshold, trigger: 'blur'},
+          ],
+          diskInThreshold: [
+            {trigger: 'blur', required: true, message: '必填项'},
+            {validator: validateThreshold, trigger: 'blur'},
+          ],
+          diskOutThreshold: [
+            {trigger: 'blur', required: true, message: '必填项'},
+            {validator: validateThreshold, trigger: 'blur'},
+          ],
+          netInThreshold: [
+            {trigger: 'blur', required: true, message: '必填项'},
+            {validator: validateThreshold, trigger: 'blur'},
+          ],
+          netOutThreshold: [
+            {trigger: 'blur', required: true, message: '必填项'},
+            {validator: validateThreshold, trigger: 'blur'},
+          ],
         },
-        editFormRules: {},
       }
     },
     methods: {
-      showEditDialog(userInfo) {
-        this.editForm = userInfo;
+      showEditDialog(ruleInfo) {
+        this.editForm = ruleInfo;
+        console.log(this.editForm.cpu_threshold);
         this.editDialogVisible = true
       },
       addDialogClose() {
@@ -178,7 +217,7 @@
         this.loading = true;
         const {data: res} = await this.$http.get('alert', {params: {"hostname": this.hotsName}});
         if (res.meta.status !== 200) return this.$message.error('获取报警规则失败');
-        this.alertList = res.data;
+        this.ruleList = res.data;
         this.loading = false;
       },
       async addRule() {
@@ -195,10 +234,20 @@
         })
       },
       async editRule() {
+        this.$refs.editFormRef.validate(async valid => {
+          if (!valid) return;
+          const {data: res} = await this.$http.put('alert', this.editForm);
+          if (res.meta.status !== 200) return this.$message.error('报警规则更新失败！');
+          //关闭对话框
+          this.editDialogVisible = false;
+          //刷新列表重新获取数据
+          this.getAlertRules();
+          return this.$message.success('报警规则更新成功！')
+        })
       },
       async removeRuleById(id) {
         //询问用户是否删除
-        const info = await this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+        const info = await this.$confirm('此操作将永久删除该报警规则, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -206,10 +255,10 @@
         if (info !== 'confirm') {
           return this.$message.info('取消删除')
         }
-        const {data: res} = await this.$http.delete('users', {params: {'id': id}});
-        if (res.meta.status !== 200) return this.$message.error('用户删除失败！');
-        this.$message.success('用户删除成功！');
-        this.getUserList()
+        const {data: res} = await this.$http.delete('alert', {params: {'id': id}});
+        if (res.meta.status !== 200) return this.$message.error('规则删除失败！');
+        this.$message.success('规则删除成功！');
+        this.getAlertRules()
       }
     }
   }
