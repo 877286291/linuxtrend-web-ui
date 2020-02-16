@@ -72,25 +72,25 @@
     </el-dialog>
     <el-dialog title="修改报警规则" :visible.sync="editDialogVisible" width="50%" @close="editDialogClosed">
       <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="70px">
-        <el-form-item label="主机名" prop="hostName">
+        <el-form-item label="主机名" prop="hostname">
           <el-input v-model="editForm.hostname" disabled/>
         </el-form-item>
-        <el-form-item label="CPU" prop="cpuThreshold">
+        <el-form-item label="CPU" prop="cpu_threshold">
           <el-input v-model="editForm.cpu_threshold"/>
         </el-form-item>
-        <el-form-item label="内存" prop="memoryThreshold">
+        <el-form-item label="内存" prop="memory_threshold">
           <el-input v-model="editForm.memory_threshold"/>
         </el-form-item>
-        <el-form-item label="磁盘(读) M/s" prop="diskInThreshold">
+        <el-form-item label="磁盘(读) M/s" prop="disk_in_threshold">
           <el-input v-model="editForm.disk_in_threshold"/>
         </el-form-item>
-        <el-form-item label="磁盘(写) M/s" prop="diskOutThreshold">
+        <el-form-item label="磁盘(写) M/s" prop="disk_out_threshold">
           <el-input v-model="editForm.disk_out_threshold"/>
         </el-form-item>
-        <el-form-item label="网络下行 KB/s" prop="netInThreshold">
+        <el-form-item label="网络下行 KB/s" prop="net_in_threshold">
           <el-input v-model="editForm.net_in_threshold"/>
         </el-form-item>
-        <el-form-item label="网络上行 KB/s" prop="netOutThreshold">
+        <el-form-item label="网络上行 KB/s" prop="net_out_threshold">
           <el-input v-model="editForm.net_out_threshold"/>
         </el-form-item>
       </el-form>
@@ -109,10 +109,15 @@
       this.getAlertRules()
     },
     data() {
-      const validateThreshold = (rule, value, callback) => {
-        if (!value) {
-          callback(new Error('必填项'))
+      const validateNumber = (rule, value, callback) => {
+        value = Number(value)
+        if (typeof value === 'number' && !isNaN(value)) {
+          callback()
+        } else {
+          callback(new Error('必须为数字'))
         }
+      };
+      const validateCpuThreshold = (rule, value, callback) => {
         value = Number(value)
         if (typeof value === 'number' && !isNaN(value)) {
           if (value < 0 || value > 100) {
@@ -146,56 +151,56 @@
           ],
           cpuThreshold: [
             {trigger: 'blur', required: true, message: '必填项'},
-            {validator: validateThreshold, trigger: 'blur'},
+            {validator: validateCpuThreshold, trigger: 'blur'},
           ],
           memoryThreshold: [
             {trigger: 'blur', required: true, message: '必填项'},
-            {validator: validateThreshold, trigger: 'blur'},
+            {validator: validateNumber, trigger: 'blur'},
           ],
           diskInThreshold: [
             {trigger: 'blur', required: true, message: '必填项'},
-            {validator: validateThreshold, trigger: 'blur'},
+            {validator: validateNumber, trigger: 'blur'},
           ],
           diskOutThreshold: [
             {trigger: 'blur', required: true, message: '必填项'},
-            {validator: validateThreshold, trigger: 'blur'},
+            {validator: validateNumber, trigger: 'blur'},
           ],
           netInThreshold: [
             {trigger: 'blur', required: true, message: '必填项'},
-            {validator: validateThreshold, trigger: 'blur'},
+            {validator: validateNumber, trigger: 'blur'},
           ],
           netOutThreshold: [
             {trigger: 'blur', required: true, message: '必填项'},
-            {validator: validateThreshold, trigger: 'blur'},
+            {validator: validateNumber, trigger: 'blur'},
           ],
 
         },
         //修改表单
         editForm: {},
         editFormRules: {
-          cpuThreshold: [
+          cpu_threshold: [
             {required: true, message: '必填项', trigger: 'blur'},
-            {validator: validateThreshold, trigger: 'blur'},
+            {validator: validateCpuThreshold, trigger: 'blur'},
           ],
-          memoryThreshold: [
+          memory_threshold: [
             {trigger: 'blur', required: true, message: '必填项'},
-            {validator: validateThreshold, trigger: 'blur'},
+            {validator: validateNumber, trigger: 'blur'},
           ],
-          diskInThreshold: [
+          disk_in_threshold: [
             {trigger: 'blur', required: true, message: '必填项'},
-            {validator: validateThreshold, trigger: 'blur'},
+            {validator: validateNumber, trigger: 'blur'},
           ],
-          diskOutThreshold: [
+          disk_out_threshold: [
             {trigger: 'blur', required: true, message: '必填项'},
-            {validator: validateThreshold, trigger: 'blur'},
+            {validator: validateNumber, trigger: 'blur'},
           ],
-          netInThreshold: [
+          net_in_threshold: [
             {trigger: 'blur', required: true, message: '必填项'},
-            {validator: validateThreshold, trigger: 'blur'},
+            {validator: validateNumber, trigger: 'blur'},
           ],
-          netOutThreshold: [
+          net_out_threshold: [
             {trigger: 'blur', required: true, message: '必填项'},
-            {validator: validateThreshold, trigger: 'blur'},
+            {validator: validateNumber, trigger: 'blur'},
           ],
         },
       }
@@ -203,7 +208,6 @@
     methods: {
       showEditDialog(ruleInfo) {
         this.editForm = ruleInfo;
-        console.log(this.editForm.cpu_threshold);
         this.editDialogVisible = true
       },
       addDialogClose() {
