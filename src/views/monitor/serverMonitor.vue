@@ -32,29 +32,29 @@
         </el-date-picker>
       </el-col>
     </el-row>
-    <el-card style="margin-bottom: 20px;height: 380px">
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <div id="alarmSummary" style="border-radius: 4px">
-            错误事件
-            <el-progress :text-inside="true" :stroke-width="26" :percentage="70"/>
-            警告事件
-            <el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="warning"/>
-            致命事件
-            <el-progress :text-inside="true" :stroke-width="20" :percentage="50" status="exception"/>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <ve-ring :data="serverSummary"></ve-ring>
-        </el-col>
-        <el-col :span="6">
-          <ve-ring :data="serverSummary"></ve-ring>
-        </el-col>
-        <el-col :span="6">
-          <ve-ring :data="serverSummary"></ve-ring>
-        </el-col>
-      </el-row>
-    </el-card>
+<!--    <el-card style="margin-bottom: 20px;height: 380px">-->
+<!--      <el-row :gutter="20">-->
+<!--        <el-col :span="6">-->
+<!--          <div id="alarmSummary" style="border-radius: 4px">-->
+<!--            错误事件-->
+<!--            <el-progress :text-inside="true" :stroke-width="26" :percentage="70"/>-->
+<!--            警告事件-->
+<!--            <el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="warning"/>-->
+<!--            致命事件-->
+<!--            <el-progress :text-inside="true" :stroke-width="20" :percentage="50" status="exception"/>-->
+<!--          </div>-->
+<!--        </el-col>-->
+<!--        <el-col :span="6">-->
+<!--          <ve-ring :data="serverSummary"></ve-ring>-->
+<!--        </el-col>-->
+<!--        <el-col :span="6">-->
+<!--          <ve-ring :data="serverSummary"></ve-ring>-->
+<!--        </el-col>-->
+<!--        <el-col :span="6">-->
+<!--          <ve-ring :data="serverSummary"></ve-ring>-->
+<!--        </el-col>-->
+<!--      </el-row>-->
+<!--    </el-card>-->
     <el-card>
       <ve-line :data="chartData" :settings="chartSettings" height="600px" :data-zoom="dataZoom" :loading="loading"
                :data-empty="dataEmpty"/>

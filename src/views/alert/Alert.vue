@@ -7,7 +7,7 @@
     <el-card>
       <el-row :gutter="20">
         <el-col :span="7">
-          <el-input placeholder="请输入内容" v-model="hotsName" clearable @clear="getAlertRules"
+          <el-input placeholder="请输入主机名" v-model="hotsName" clearable @clear="getAlertRules"
                     @keyup.enter.native="getAlertRules">
             <el-button slot="append" icon="el-icon-search" @click="getAlertRules"/>
           </el-input>

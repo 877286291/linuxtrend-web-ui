@@ -102,7 +102,7 @@
     },
     data() {
       //验证邮箱
-      var checkEmail = (rule, value, callback) => {
+      const checkEmail = (rule, value, callback) => {
         const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
         if (regEmail.test(value)) {
           return callback()
@@ -158,7 +158,7 @@
     }, methods: {
       async getUserList() {
         this.loading = true;
-        const {data: res} = await this.$http.get('users', {params: this.queryInfo});
+        const {data: res} = await this.$http.get('managerUsers', {params: this.queryInfo});
         if (res.meta.status !== 200) return this.$message.error('获取用户列表失败');
         this.userList = res.data['users'];
         this.loading = false;
@@ -174,7 +174,7 @@
       },
       //监听用户状态的改变
       async userStateChanged(userInfo) {
-        const {data: res} = await this.$http.put('users', {'id': userInfo.id, 'type': userInfo.state});
+        const {data: res} = await this.$http.put('managerUsers', {'id': userInfo.id, 'type': userInfo.state});
         if (res.meta.status !== 200) {
           userInfo.state = !userInfo.state;
           return this.$message.error('修改用户状态失败')
@@ -193,7 +193,7 @@
       addUser() {
         this.$refs.addFormRef.validate(async (valid) => {
           if (!valid) return;
-          const {data: res} = await this.$http.post('users', this.addForm);
+          const {data: res} = await this.$http.post('managerUsers', this.addForm);
           if (res.meta.status !== 200) {
             return this.$message.error('添加用户失败')
           }
@@ -214,7 +214,7 @@
       editUserInfo() {
         this.$refs.editFormRef.validate(async valid => {
           if (!valid) return;
-          const {data: res} = await this.$http.put('users', {'id': this.editForm.id, 'email': this.editForm.email});
+          const {data: res} = await this.$http.put('managerUsers', {'id': this.editForm.id, 'email': this.editForm.email});
           if (res.meta.status !== 200) return this.$message.error('用户信息更新失败！');
           //关闭对话框
           this.editDialogVisible = false;
@@ -234,14 +234,12 @@
         if (info !== 'confirm') {
           return this.$message.info('取消删除')
         }
-        const {data: res} = await this.$http.delete('users', {params: {'id': id}});
+        const {data: res} = await this.$http.delete('managerUsers', {params: {'id': id}});
         if (res.meta.status !== 200) return this.$message.error('用户删除失败！');
         this.$message.success('用户删除成功！');
         this.getUserList()
       }
-
     }
-
   }
 </script>
 
