@@ -15,7 +15,7 @@ import './assets/icon/iconfont.css'
 import axios from 'axios'
 
 
-axios.defaults.baseURL = 'http://127.0.0.1:10000/';
+axios.defaults.baseURL = 'http://39.108.180.201:10000/';
 axios.interceptors.request.use(config => {
   config.headers.Authorization = 'Token ' + window.sessionStorage.getItem('token');
   return config
