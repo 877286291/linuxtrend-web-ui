@@ -21,7 +21,7 @@
         <el-table-column label="SN" prop="sn"/>
         <el-table-column label="HMC" prop="hmc"/>
         <el-table-column label="地区" prop="area"/>
-        <el-table-column>
+        <el-table-column label="操作">
           <template slot-scope="scope">
             <!-- 编辑按钮 -->
             <el-tooltip effect="dark" content="编辑服务器" placement="top" :enterable="false">
