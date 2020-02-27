@@ -6,7 +6,7 @@
     </el-breadcrumb>
     <el-row :gutter="20" style="margin-bottom: 20px">
       <el-col :span="4" :offset="1">
-        <el-select v-model="queryLog.risk" clearable placeholder="请选择风险等级">
+        <el-select v-model="queryLog.risk" clearable placeholder="请选择风险等级" @change="getLog">
           <el-option
                   v-for="item in riskOptions"
                   :key="item.value"
@@ -16,7 +16,7 @@
         </el-select>
       </el-col>
       <el-col :span="4">
-        <el-select v-model="queryLog.state_color" clearable placeholder="请选择状态">
+        <el-select v-model="queryLog.state_color" clearable placeholder="请选择状态" @change="getLog">
           <el-option
                   v-for="item in stateOptions"
                   :key="item.value"
