@@ -57,7 +57,7 @@
     <!-- 修改用户对话框 -->
     <el-dialog title="修改服务器" :visible.sync="editDialogVisible" width="50%" @close="editDialogClosed">
       <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="70px">
-        <el-form-item label="服务器名称" prop="sn">
+        <el-form-item label="SN" prop="sn">
           <el-input v-model="editForm['sn']" disabled/>
         </el-form-item>
         <el-form-item label="HMC" prop="hmc">
