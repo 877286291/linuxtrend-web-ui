@@ -27,8 +27,6 @@
           <ve-line :data="netData" ref="chart4"/>
         </el-card>
       </el-tab-pane>
-      <el-tab-pane label="负载" name="5">负载</el-tab-pane>
-      <el-tab-pane label="进程" name="6">进程</el-tab-pane>
     </el-tabs>
   </div>
 </template>
