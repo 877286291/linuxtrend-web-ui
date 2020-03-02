@@ -20,6 +20,14 @@ axios.interceptors.request.use(config => {
   config.headers.Authorization = 'Token ' + window.sessionStorage.getItem('token');
   return config
 });
+
+axios.interceptors.response.use(function (response) {
+  return response
+}, error => {
+  if (error.status.code === 401) {
+    this.$router.push('/login')
+  }
+});
 Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
