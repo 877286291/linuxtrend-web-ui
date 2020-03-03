@@ -21,13 +21,6 @@ axios.interceptors.request.use(config => {
   return config
 });
 
-axios.interceptors.response.use(function (response) {
-  return response
-}, error => {
-  if (error.status.code === 401) {
-    this.$router.push('/login')
-  }
-});
 Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
