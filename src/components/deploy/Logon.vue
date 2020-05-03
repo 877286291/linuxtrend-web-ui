@@ -23,9 +23,9 @@
     data() {
       return {
         logonForm: {
-          ip: '',
-          username: '',
-          password: '',
+          ip: '172.16.31.232',
+          username: 'service',
+          password: 'atsservz',
         },
         loading: false,
       }

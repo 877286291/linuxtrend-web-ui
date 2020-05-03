@@ -55,6 +55,7 @@
           }
           this.$message.success('登陆成功');
           window.sessionStorage.setItem('token', res.token)
+          window.sessionStorage.setItem('role', res.role)
           await this.$router.push('/home')
         })
       },
