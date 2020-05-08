@@ -23,9 +23,12 @@
   import Logon from "../../components/deploy/Logon";
   import CreateStorageGroup from "../../components/deploy/CreateStorageGroup";
   import ExportWWPN from "../../components/deploy/ExportWWPN";
-  import createPartition from "../../components/deploy/createPartition";
-  import bindNic from "../../components/deploy/bindNic";
-  import bindSG from "../../components/deploy/bindSG";
+  import CreatePartition from "../../components/deploy/CreatePartition";
+  import BindNic from "../../components/deploy/BindNic";
+  import BindSG from "../../components/deploy/BindSG";
+  import InstallOs from "../../components/deploy/InstallOs";
+  import ChangeBoot from "../../components/deploy/ChangeBoot";
+  import DeployComplete from "../../components/deploy/DeployComplete";
 
   export default {
     name: "BatchDeploy",
@@ -39,9 +42,12 @@
       'logon': Logon,
       'create-storage-group': CreateStorageGroup,
       'export-wwpn': ExportWWPN,
-      'create-partition': createPartition,
-      'bind-nic': bindNic,
-      'bind-sg': bindSG,
+      'create-partition': CreatePartition,
+      'bind-nic': BindNic,
+      'bind-sg': BindSG,
+      'install-os': InstallOs,
+      'change-boot': ChangeBoot,
+      'deploy-complete': DeployComplete,
     },
     methods: {
       next(step) {

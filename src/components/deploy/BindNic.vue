@@ -15,7 +15,7 @@
 
 <script>
   export default {
-    name: "bindNic",
+    name: "BindNic",
     created() {
       this.bindNic()
     },

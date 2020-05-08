@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-table :data="bindSGInfo" tyle="width: 100%" stripe v-loading="loading" element-loading-text="SG绑定中"
-              id="bindNicInfo">
+              id="bindSGInfo">
       <el-table-column prop="id" label="id" type="index"/>
       <el-table-column prop="cpcName" label="CPC名称"/>
       <el-table-column prop="LparName" label="分区名称"/>
@@ -32,7 +32,7 @@
         this.loading = false;
       },
       nextStep() {
-        this.$parent.next('bind-sg')
+        this.$parent.next('install-os')
       }
     }
   }

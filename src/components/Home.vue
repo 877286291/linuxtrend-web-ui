@@ -3,8 +3,8 @@
         <!-- 头部区域 -->
         <el-header>
             <div>
-                <img src="../assets/logo.png" alt="" height="48" width="48">
-                <span>星联云服运维平台</span>
+                <img src="../assets/logo2.png" alt="" height="48" width="48">
+                <span>PICC自动化运维平台</span>
             </div>
             <el-dropdown>
                 <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"/>
