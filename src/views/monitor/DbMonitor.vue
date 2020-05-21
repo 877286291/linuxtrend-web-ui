@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: "dbMonitor"
+    name: "DbMonitor"
   }
 </script>
 

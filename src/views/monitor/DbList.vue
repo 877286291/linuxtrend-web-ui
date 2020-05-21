@@ -1,10 +1,10 @@
 <template>
-  <el-card>dbList</el-card>
+  <el-card>DbList</el-card>
 </template>
 
 <script>
   export default {
-    name: "dbList"
+    name: "DbList"
   }
 </script>
 

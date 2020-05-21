@@ -9,7 +9,7 @@
             <el-dropdown>
                 <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"/>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item @click.native="">个人中心</el-dropdown-item>
+                    <el-dropdown-item @click.native="userCenter">个人中心</el-dropdown-item>
                     <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
@@ -79,14 +79,12 @@
                 });
                 this.$router.push('/login')
             },
+            userCenter() {
+                this.$router.push('/userCenter')
+            },
             async getMenuList() {
                 const {data: res} = await this.$http.get('menu');
                 if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
-                // if (window.localStorage.getItem('role')) {
-                //     // this.menuList = res.data[:4];
-                // } else {
-                //     this.menuList = res.data;
-                // }
                 this.menuList = res.data;
 
             },
