@@ -20,7 +20,11 @@
       <el-table :data="userList" border stripe v-loading="loading" element-loading-text="加载中">
         <el-table-column label="id" prop="id" type="index"/>
         <el-table-column label="用户名" prop="username"/>
-        <el-table-column label="头像" prop="avatar"/>
+        <el-table-column label="头像" prop="avatar">
+            <template slot-scope="scope">
+                <img :src="'data:image/png;base64,'+scope.row.avatar">
+            </template>
+        </el-table-column>
         <el-table-column label="邮箱" prop="email"/>
         <el-table-column label="用户状态">
           <template slot-scope="scope">

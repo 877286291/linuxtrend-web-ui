@@ -234,7 +234,7 @@
           //关闭对话框
           this.addDialogVisible = false;
           //重新加载用户数据
-          this.getAlertRules()
+          await this.getAlertRules()
         })
       },
       async editRule() {
@@ -245,7 +245,7 @@
           //关闭对话框
           this.editDialogVisible = false;
           //刷新列表重新获取数据
-          this.getAlertRules();
+          await this.getAlertRules();
           return this.$message.success('报警规则更新成功！')
         })
       },
@@ -262,7 +262,7 @@
         const {data: res} = await this.$http.delete('alert', {params: {'id': id}});
         if (res.meta.status !== 200) return this.$message.error('规则删除失败！');
         this.$message.success('规则删除成功！');
-        this.getAlertRules()
+        await this.getAlertRules()
       }
     }
   }
