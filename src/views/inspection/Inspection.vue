@@ -13,10 +13,10 @@
         </el-col>
       </el-row>
       <el-table :data="inspectionData" tyle="width: 100%" stripe v-loading="loading" id="inspection">
-        <el-table-column prop="id" label="id" type="index"/>
-        <el-table-column prop="problem" label="问题概述"/>
-        <el-table-column prop="sn" label="主机SN"/>
-        <el-table-column prop="datetime" label="最后更新时间"/>
+        <el-table-column prop="id" label="id" type="index" align="center"/>
+        <el-table-column prop="problem" label="问题概述" align="center"/>
+        <el-table-column prop="sn" label="主机SN" align="center"/>
+        <el-table-column prop="datetime" label="最后更新时间" align="center"/>
       </el-table>
       <el-pagination
               @size-change="handleSizeChange"

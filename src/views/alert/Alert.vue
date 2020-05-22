@@ -17,15 +17,15 @@
         </el-col>
       </el-row>
       <el-table :data="ruleList" border stripe v-loading="loading" element-loading-text="规则加载中">
-        <el-table-column label="id" prop="id" type="index"/>
-        <el-table-column label="主机名" prop="hostname"/>
-        <el-table-column label="CPU" prop="cpu_threshold"/>
-        <el-table-column label="内存" prop="memory_threshold"/>
-        <el-table-column label="磁盘(读) M/s" prop="disk_in_threshold"/>
-        <el-table-column label="磁盘(写) M/s" prop="disk_out_threshold"/>
-        <el-table-column label="网络下行 KB/s" prop="net_in_threshold"/>
-        <el-table-column label="网络上行 KB/s" prop="net_out_threshold"/>
-        <el-table-column label="操作">
+        <el-table-column label="id" prop="id" type="index" align="center"/>
+        <el-table-column label="主机名" prop="hostname" align="center"/>
+        <el-table-column label="CPU" prop="cpu_threshold" align="center"/>
+        <el-table-column label="内存" prop="memory_threshold" align="center"/>
+        <el-table-column label="磁盘(读) M/s" prop="disk_in_threshold" align="center"/>
+        <el-table-column label="磁盘(写) M/s" prop="disk_out_threshold" align="center"/>
+        <el-table-column label="网络下行 KB/s" prop="net_in_threshold" align="center"/>
+        <el-table-column label="网络上行 KB/s" prop="net_out_threshold" align="center"/>
+        <el-table-column label="操作" align="center">
           <template slot-scope="scope">
             <!-- 编辑按钮 -->
             <el-tooltip effect="dark" content="编辑规则" placement="top" :enterable="false">

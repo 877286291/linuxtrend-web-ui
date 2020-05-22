@@ -83,10 +83,14 @@
                 this.$router.push('/userCenter')
             },
             async getMenuList() {
-                const {data: res} = await this.$http.get('menu');
+                const {data: res} = await this.$http.get('menu').catch(function (error) {
+                    if (error.response && error.response.status === 401) {
+                        window.location.href = "login";
+                        return this.$message.error("Token过期，请重新登陆");
+                    }
+                });
                 if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
                 this.menuList = res.data;
-
             },
             //点击按钮切换折叠展开
             toggleCollapse() {

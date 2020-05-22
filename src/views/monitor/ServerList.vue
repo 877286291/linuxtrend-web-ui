@@ -7,11 +7,11 @@
     </el-breadcrumb>
     <el-card>
       <el-table :data="serverList" stripe style="width: 100%" v-loading="loading" border>
-        <el-table-column prop="id" label="id" type="index"/>
-        <el-table-column prop="sn" label="主机序列号"/>
-        <el-table-column prop="hmc" label="HMC地址"/>
-        <el-table-column prop="area" label="地区"/>
-        <el-table-column prop="desc" label="描述"/>
+        <el-table-column prop="id" label="id" type="index" align="center"/>
+        <el-table-column prop="sn" label="主机序列号" align="center"/>
+        <el-table-column prop="hmc" label="HMC地址" align="center"/>
+        <el-table-column prop="area" label="地区" align="center"/>
+        <el-table-column prop="desc" label="描述" align="center"/>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-tooltip content="查看详情" placement="top">

@@ -18,22 +18,22 @@
         </el-col>
       </el-row>
       <el-table :data="userList" border stripe v-loading="loading" element-loading-text="加载中">
-        <el-table-column label="id" prop="id" type="index"/>
-        <el-table-column label="用户名" prop="username"/>
-        <el-table-column label="头像" prop="avatar">
+        <el-table-column label="id" prop="id" type="index" align="center"/>
+        <el-table-column label="用户名" prop="username" align="center"/>
+        <el-table-column label="头像" prop="avatar" align="center">
             <template slot-scope="scope">
-                <img :src="'data:image/png;base64,'+scope.row.avatar">
+                <img :src="'data:image/png;base64,'+scope.row.avatar" height="100px" width="100px">
             </template>
         </el-table-column>
-        <el-table-column label="邮箱" prop="email"/>
-        <el-table-column label="用户状态">
+        <el-table-column label="邮箱" prop="email" align="center"/>
+        <el-table-column label="用户状态" align="center">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.state" @change="userStateChanged(scope.row)">
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="角色" prop="role"/>
-        <el-table-column label="操作">
+        <el-table-column label="角色" prop="role" align="center"/>
+        <el-table-column label="操作" align="center">
           <template slot-scope="scope">
             <!-- 编辑按钮 -->
             <el-tooltip effect="dark" content="编辑用户" placement="top" :enterable="false">
