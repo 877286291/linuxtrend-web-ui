@@ -44,9 +44,9 @@
               <el-button type="danger" icon="el-icon-delete" @click="removeUserById(scope.row.id)"/>
             </el-tooltip>
             <!-- 分配角色按钮 -->
-            <el-tooltip effect="dark" content="分配角色" placement="top" :enterable="false">
-              <el-button type="warning" icon="el-icon-setting"/>
-            </el-tooltip>
+<!--            <el-tooltip effect="dark" content="分配角色" placement="top" :enterable="false">-->
+<!--              <el-button type="warning" icon="el-icon-setting"/>-->
+<!--            </el-tooltip>-->
           </template>
         </el-table-column>
       </el-table>

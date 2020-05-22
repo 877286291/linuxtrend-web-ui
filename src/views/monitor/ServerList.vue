@@ -12,7 +12,7 @@
         <el-table-column prop="hmc" label="HMC地址" align="center"/>
         <el-table-column prop="area" label="地区" align="center"/>
         <el-table-column prop="desc" label="描述" align="center"/>
-        <el-table-column label="操作">
+        <el-table-column label="操作" align="center">
           <template slot-scope="scope">
             <el-tooltip content="查看详情" placement="top">
               <el-button type="primary" icon="el-icon-data-line" @click="getServerDetail(scope.row['sn'])"/>

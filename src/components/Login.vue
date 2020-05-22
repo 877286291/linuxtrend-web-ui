@@ -50,12 +50,11 @@
         this.$refs.loginFormRef.validate(async valid => {
           if (!valid) return;
           const {data: res} = await this.$http.post('login', this.loginForm);
-          if (res.status != 200) {
+          if (res.status !== 200) {
             return this.$message.error('登陆失败！')
           }
           this.$message.success('登陆成功');
           window.sessionStorage.setItem('token', res.token)
-          window.sessionStorage.setItem('role', res.role)
           await this.$router.push('/home')
         })
       },
