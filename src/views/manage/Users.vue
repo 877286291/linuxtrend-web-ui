@@ -22,7 +22,7 @@
         <el-table-column label="用户名" prop="username" align="center"/>
         <el-table-column label="头像" prop="avatar" align="center">
             <template slot-scope="scope">
-                <img :src="'data:image/png;base64,'+scope.row.avatar" height="100px" width="100px">
+                <img :src="'data:image/png;base64,'+scope.row.avatar" height="48px" width="48px">
             </template>
         </el-table-column>
         <el-table-column label="邮箱" prop="email" align="center"/>
