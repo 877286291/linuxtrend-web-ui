@@ -26,6 +26,8 @@
                 type="daterange"
                 align="right"
                 unlink-panels
+                @change="getMonitorData($route.params.serverName,dateScope[0],dateScope[1])"
+                value-format="yyyy-MM-dd"
                 range-separator="至"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期">
@@ -42,7 +44,7 @@
 <script>
   export default {
     created() {
-      this.getMonitorData(this.$route.params.serverName)
+      this.getMonitorData(this.$route.params.serverName,this.dateScope[0],this.dateScope[1])
     },
     name: "serverMonitor",
     data() {
@@ -72,13 +74,13 @@
         },
         loading: true,
         dataEmpty: false,
-        dateScope: ''
+        dateScope: ["",""]
       }
     },
     methods: {
-      async getMonitorData(serverName) {
+      async getMonitorData(serverName,startDate, endDate) {
         this.loading = true;
-        const {data: res} = await this.$http.post('servers', {'serverName': serverName});
+        const {data: res} = await this.$http.post('servers', {'serverName': serverName,'startDate':startDate,'endDate':endDate});
         if (res.meta.status !== 200) return this.$message.error('主机监控数据获取失败！');
         this.chartSettings.stack['分区'] = res.data['stackList'];
         this.chartData.columns = res.data['serverList'];
