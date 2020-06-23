@@ -65,13 +65,6 @@
           columns: [],
           rows: []
         },
-        serverSummary: {
-          columns: ['日期', '访问用户'],
-          rows: [
-            {'日期': '1/1', '访问用户': 1393},
-            {'日期': '1/2', '访问用户': 3530},
-          ]
-        },
         loading: true,
         dataEmpty: false,
         dateScope: ["",""]
@@ -86,7 +79,9 @@
         this.chartData.columns = res.data['serverList'];
         this.chartData.rows = res.data['rows'];
         this.loading = false;
-        if (this.chartData.rows.length === 0) this.dataEmpty = true
+        if (this.chartData.rows.length === 0){
+          this.dataEmpty = false;
+        }
       },
       getDetail(partitionName) {
         this.$router.push({
